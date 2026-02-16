@@ -512,6 +512,18 @@ var bottomRightContainerDiv = document.getElementById('bottom-right-container')
 
 //layer search
 
+var searchLayer = new SearchLayer({
+    layer: lyr_test_landingpoints_geopackage_2,
+    colName: 'name',
+    zoom: 10,
+    collapsed: true,
+    map: map,
+    maxResults: 10,
+});
+map.addControl(searchLayer);
+document.getElementsByClassName('search-layer')[0].getElementsByTagName('button')[0].className += ' fa fa-binoculars';
+document.getElementsByClassName('search-layer-input-search')[0].placeholder = 'Search feature ...';
+    
 
 //scalebar
 
