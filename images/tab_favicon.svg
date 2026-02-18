@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+
+  <!-- Ocean Background -->
+  <circle cx="32" cy="32" r="30" fill="#0A2A43"/>
+
+  <!-- Subtle Globe Grid -->
+  <g stroke="#1F4E79" stroke-width="1" fill="none" opacity="0.6">
+    <ellipse cx="32" cy="32" rx="20" ry="30"/>
+    <ellipse cx="32" cy="32" rx="30" ry="12"/>
+  </g>
+
+  <!-- Submarine Cable -->
+  <path d="M10 40 C 22 25, 42 45, 54 24"
+        stroke="#00E0FF"
+        stroke-width="3"
+        fill="none"
+        stroke-linecap="round"/>
+
+  <!-- Landing Points -->
+  <circle cx="10" cy="40" r="3" fill="#00E0FF"/>
+  <circle cx="54" cy="24" r="3" fill="#00E0FF"/>
+
+</svg>
