@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base target="_blank">    
+    
+    <title>Das globale Unterwasserkabelnetzwerk</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.ralf-wessels.de/webmap/cimdata/IngaK/tab_favicon.svg">
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0b1f2a;
+            color: #e6eef3;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 16px 0;
+            font-weight: 500;
+            letter-spacing: 0.4px;
+        }
+
+        /* === MAP === */
+        .map-wrapper {
+            width: 100%;
+            padding: 0 12px;
+        }
+
+        iframe.map-iframe {
+            width: 100%;
+            height: 85vh;
+            border: none;
+            border-radius: 10px;
+            background: #06141d;
+        }
+
+        /* === KANARIES EMBED === */
+        .embed-wrapper {
+            max-width: 1200px;
+            margin: 28px auto;
+            padding: 16px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 12px;
+        }
+
+        .embed-wrapper iframe {
+            width: 100%;
+            height: 520px;
+            border: none;
+            border-radius: 8px;
+            background: #ffffff;
+        }
+
+        /* === LEGENDE ACCORDION === */
+        .legend-accordion {
+            max-width: 1200px;
+            margin: 20px auto 10px;
+            text-align: center;
+        }
+
+        .legend-toggle {
+            background: #123247;
+            color: #e6eef3;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .legend-toggle:hover {
+            background: #1d4e6a;
+        }
+
+        .legend-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: 16px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 32px;
+        }
+
+        .legend-content.open {
+            max-height: 1400px;
+        }
+
+        .legend-content img {
+            max-height: 180px;
+            background: white;
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        /* === FOOTER === */
+        .footer-info {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #b5c7d3;
+            margin: 14px 0 22px;
+        }
+
+        .footer-info a {
+            color: #8fc5ff;
+            text-decoration: none;
+        }
+
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* === MOBILE === */
+        @media (max-width: 768px) {
+            iframe.map-iframe {
+                height: 75vh;
+            }
+
+            .embed-wrapper iframe {
+                height: 420px;
+            }
+
+            .legend-content img {
+                max-height: 150px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Das globale Netzwerk der Unterwasserkabel</h2>
+
+    <div class="map-wrapper">
+        <iframe 
+            class="map-iframe"
+            src="https://qgiscloud.com/cimdata8/cable_cloudqgis_edited_online"
+            title="Unterwasserkabelkarte"
+            loading="lazy">
+        </iframe>
+    </div>
+
+    <!-- AUFKLAPPBARE LEGENDE -->
+    <div class="legend-accordion">
+        <button class="legend-toggle" onclick="toggleLegend()">
+            Legenden anzeigen
+        </button>
+
+        <div class="legend-content" id="legendContent">
+            <img src="https://www.ralf-wessels.de/webmap/cimdata/IngaK/legende_img/landepunkte_land_colored.png" alt="Landepunkte farbig">
+            <img src="https://www.ralf-wessels.de/webmap/cimdata/IngaK/legende_img/landepunkte_legende.png" alt="Landepunkte Legende">
+            <img src="https://www.ralf-wessels.de/webmap/cimdata/IngaK/legende_img/seekabel_legende.png" alt="Seekabel Legende">
+        </div>
+    </div>
+
+	<!-- KANARIES EMBED -->
+	<div class="embed-wrapper">
+		<h2 style="text-align:center; margin-bottom:16px;">Anzahl der Kabellandepunkte nach Land:</h2>
+		<iframe 
+            src="https://kanaries.net/tool_component/share-embed?code=zVvLbuNKc34VgqsEkA9ESvJtJ3k8Ho8tH2PkmQP8wcAokSWyI7Jbpy%2F2yAPvTl4hL5ADBP8i21mdnV4saEq2u2VVm5P8AbKyRLn6Uv11Xb4qfo8zkWN8%2FD3OBJ%2Bxwn7KcQam0sOikFiAxjw%2BnkGlsBMXKGoVH%2F9LPAUZf%2B3EmRAynyyVxjo%2BjgvkKFkWd%2BKK1UzHx3tJJ56JKm9Eivvstht%2FfezEyDORM16oZjJWI1dMcPtP3%2BMZy%2B1I99ltEndiDjXGx3ZpmnHkOu7EU1C447HCGrhm2c1yYX%2FiomYcqrgTA4dq%2BfLD83TxY8edLX2Z7RJ47k9k%2F9zm%2BL%2Be5rZGuJ3j8tY%2BeJ5vjKCMxMh%2BVaGhyOkfv3biej3Ktha7L%2FP8nt2yrY09PdqacjPW6wl%2FN%2FabBs3u7K9QFFfrgZSptxTae5l4yB%2BgrKIcZWR1iwvD5xr9lUDzP7eV9%2Fs%2FfFm3mTBc%2B%2Br%2FJO6j5vE%2FakJ7LeqFae6NlgY7MX5bSFTNGR5%2Fj8UiPo4Ft4ILkNBcqK%2BdGNT2Eh9fYecOqt3YuYPK7ALP%2F1BlXzuxFPfbWPo%2FuyOdWAmp7SNUGXJrG5o1ZKIy9SvD8P8HWeslCrk%2BQLGAjOnl%2BotiD7j5VMJi81FCzszmuHWJGtYfK8ELpk2%2B%2Ba8KtPOtQHGerz%2FmqIFVG%2FkZqzTKp8Hwm7afHq30UhhtcaZKcT%2FM9Nq0bgy4fXYD0wonpq5BLl9%2B0JDN7b6av52YcY0SMrvvSQYVPv%2FjA0qxebIG93qn3%2BO68SPxjH1DC40SWVHq%2BHiQHHbie5brMj4edPuP1iPIGuwKH5vdXeByA5%2B4E0tUorprxvv2NMHy6cNG15uFPKv7eWuNnp%2B%2BNatqvjzaYXmOEmV8HN9hAXsVa1Cg7D7OeVaZHD%2FzGnRWYn5SCikWFdoFO1obVtUZimaSc77jf5rFXUOFWls1xJ3YKJzcFc9qWuvs%2B8u67f43ynt8wvr6sxT3zw%2Ftju3HDV6anzcw%2Bv74%2BNiJ75g635iIZWnEy%2BU4KUHqKIntOPbjO2gA933jF467nY2fPY5PjRQLq5H1NT%2BOT5Wu1ld8feOO%2B9YWbQSTF8GhYuCInfOcIX%2BRSl2xlBT7Iqq5krgw04rNo5OScXgZIzlwxugF1rz6d6VRSmRZ%2BSLddYT7zgJmkmXuElZ%2F6JKJhbd6V%2FbwkFz9BEzO9oYSpp70vit9FJh6JLS6B3fL7sRH3YDohNVTmN4jIUof1DXMmdLgLDdxBQek4AXUU5GrrARC9CCw3DOYGhcdLqa6XRoeKJFxVmiMGi2rrMTotGYSNO7Wd5IMAkB5L4HPt3DS9wCe7NOnvfornwuJ7v67nuwBKXsl5LasL3oYUN4YpJjPxYvooSfqIOxKSF1Gwxq3RrhiGUgoDBBHkIag9unpel4IXojdh5%2BkSWCEd1iLuQS9Pj9qvIE3XhoY7wpqNmUEDpO0Rx7DcFaUwLfw7x1EyMy8W%2F3JsQY5d7R45Arvhy77xOTUrUtC9umSTZeudUk8vA4CkjeGo%2FKtsrfawFY%2FmXr1J%2FdkvQUfBGQ%2F8wIkpd%2FDgOCkEvcwR0aIHgVEr0VFrTUNebtzDZW3y4EnmoRWm5X3yB52KzelXd65dGHgurg0BL4rhjnKJpZ19unNGULRWCiop8yBbs8Vpc3%2BCHhRgQ3PS2Kr%2B4Fpb6y%2FyHcfaBoC0bnyoxBvtSFjOawKlKQ7TkMgumSYlRq50sgI%2FPZChvK0miGfIuPz1V%2FKdVAupnpBTKGckoFIL2QSx1AR96bXC4hNkGPRpGi7lhoC1BWzeiYcSi9klkbIGXFXeyEsDXkhKth9dXohLF1IAZq0g723TBJy%2Bkhcg%2B%2Ffm%2FESeA1y95z9EIw%2BF8BzQrF9Bz2%2FZgjcjzLASENEwA54qCjhwkydaV0303cwNBFmp%2FRpZiAXcvf59PtvD3Bh8yAf%2FokLjv7g7TGu12HOklDC%2FtsjWMMTjSQoVqEkwrV%2BCG3XQmrj3yk3SOiH4PYcGo1FlQN1lDToboyc1xgKcAZ0sH2FC3fVnlQouruAGqUb3bu2ehCM46wNIWYMWa2RkXPGIXoPShDiDt4ouF8Dh5qwJ4MWWPuCHB8MuiYpcWPYgYO213f1GhYG9q7QFIZxJMcIJVWrP4rlQrv3xQXagM5bP2KN1HmFQtgxGIkaOGlL9110cQ0y09s2XIOcazYnbtZ%2ByDt%2BASvIlYZc7%2FYf%2B2EXmUMBau4aZdfI7dN5w3XJKrZY2JKDgxdv5j4pPGGQlcj3zirUNgEiEL8%2FCMFlaJSWW7Fq6iJ230EbhfgzufrBaXZn%2FyC0gvfMJv9sN2z2D0OiV2gUoj9x6mmvRQ47Acb13gikLld%2Fr7Be7obAQTe4EmaIuCxNaM7kIyxcezpwr9lB8vbST4yE1X%2BC2H1pDlq45qH0fLMn3ntbfAQl1KAIl3TgOme8Qx4pBBX9k1ggj4TV4T%2F7kSbm7M5z0y4UDoI4vhJyJqo54woJX3MQNJsTqEQtOGW%2BDg5%2BZisn9lKj1ILvnQcW5GCb8gXvoZpbfDf7Ilxv6ibr9BVFDm705%2B3uKKSaG2NrQbvRfUi7%2FXOei22eIOm70x7SN2MMFSyVlwZ406Zvq%2B6kZJVzJ1OPe20Rd45Exe5o9rZF4HmNbtTssbctwoChLNBWoxnpUt8eY2Ik29RBdnnVgFOzpKTymSUPuyFRUUNFZXChFPsCOSMQSoem5xLmu7GZhAiaYTUFWrVJMJlebEn2PbKOZmgumCyYCgTRhzRJ%2FA7n6CnVk6MJ4gvQVFxylAY2OTJVAZJU0BEd09yUwHyX7HFR3VCKuvrjdwNaSAbVdvjqzU4HRedKgmtwPSb9iNbvUKGcQhOKkDUMOvC9hmr1p9KMLLkE6SHzDeupkcVu2aQbAuMIq4KmYrs0GM9QyIImYrshznACPBqDZJzIkpIufUDPqejflguU5MIDxKE0HIlwMenSJ3zJpsAF330Xkm7IollvdE%2FRx92QSbsBroBTxjDp0nZtspT06bimjbL9Z2bplQD9Ad7AFEijiP0moVzoVN2D9VmUbAhVQ54LSVEjSbCWsXY5vtXxazct8vYz25lhc3cRjWAZXcEdVNEIFBXYd%2BnwZQRsLrghMrIkDdGYv6HSCkqQ1NmlLTKyE6E0RJ9eHr6qzIWopndobEbp69N3ciG26YxNJVSe3%2FE30CIrcyq0Ew3gsRHJwNuKy52TFCT40W8y8KqCvRbJ1hi%2FMbdY6tfLei2SrXWmec1sS0FkeB6N2e8GK0EYwTRYSRtbDe%2F2sUmP9s6j0gSKlP3AhJ%2FnEhgnLkPSow32JQjKlgR5eRuCwkx6nI5XoXbJ%2BbDOxyC1WxvwKvsuUU8Ow7iOxgBSUxWgJMDZ%2F1q7Kvf20KcTqM9qits9FZ72%2BrQBugAFWUn3YyR9OjK4gYaQCU8dMuSXTIMhY5I2lP2aJ%2Ferbd51a8PZf5bGp%2Bz9ZdCRwtj2D1RkvTjI0n8yarvC6AuHDKetamJWkkln0g%2FGkag1XdxMBqF06ErIeyy8pMaD6eDNinXuHbgvHEo03jPO6XQhGdCm7AtDzaGmthuyZbZtpoYHzAVdg0sGLWgVWxhRe40xPwGWCbVN1HiXbhAy6BdCiTsqoB7QGd7N6i%2FpNTd4VmkQik7f2Xs%2BNZoRdyRI2p9KpunGo33arg1lHSh9JkGq%2FlxuBXmeVdgPAe0lolDRxeoHZ8VWw1biUUzJfsjEnUlb08ct5Pa8oGI%2FGLHarglSeaH4cGLjB4guUZDOeD%2FkVs%2B260KeZCgNumRTvzTvi4aQ9jfktsywdufc79cilHDQIqw7M6CxBrdU5gG4DYn%2BQfDcSJfE9uxIGxb9AzDyDrk0%2Bo5qHdMZMMlD%2FG7i8ug76icS%2BMPqh7JK3bsW1fIV6eoZ44MWVu2dbbAPHZSH8zCxPgapSqiqoGE8CBBY5h6YppQb8qZjwSEjaiPJQSBaU1qzWlDZy2ELXJ5W0QSqO79vwe9XC1W%2BR0YanlPxx2GQtxPK2tbGI31A%2BYCFuGckDXDYosZzIxlnOeTNkDdiCm5vpWd%2BD0MG75Pxu0%2F8LbUA5UT%2FEn1hPEOum6XkDKN1VWOrfOoN3CJXHoGcQi4oA3AYCvfGgmvb6iQpx33YJrnQv0SXJiNZokMaqx%2BFzCHQT3nUAqzr204yBUchpF6iErqkNn%2FUwnZ%2B5kxjbpN865jHjAsZ%2FWp0tWS8iNbdelT2eNQCvfaAlHWYRGU%2FOQqB9kaQjclHIR99VnrUm6%2FPt53z3ogpBUTJLTlqkfaOsLLvgexG9FHIU4%2BYjG7gnhFFy%2BSoBXkz5JoVBppram%2BXoQqPaYCg%2FiB4MRe82H2z0wBD3ETEWz3hNuJ%2FCDDOabdFD5dlJBagoRBrz6iiU6ZmWFGNqN1Qs9HZVgToc4s0gT6cS6GZJLxD2qVd6eervWszm6F8EBwjxl9R8H5V%2Baeq924UgpFV1DoremrMUQVOGbrNq%2F6q3%2BrzmNvugK1s7cgbIUClS2Zf5nN5JO8tooTOVT61eYUoTdqQf%2FqX6IJprRq1XOEdUwQSkxZmrXnyHKB9NLyY4esoMvEbUX6qh2GCy6zEqqJ4nNRtuW8xnP4l%2BoAVUqFImgR7EC6YZFOgguw0DTbnfAFuQBvi9NMWOcK1sd0clk933IHX%2F522abbhhWFVRWkgbdNwI5kOn7mvlxZlj49Qg8exetcqbRGZncCyBv7aWftLaROJoaxpX5H%2BFH4%2FIMh1zDrO3gkOVbiHJv0pNNuGRaaZWyPzMRUiTi5ELSQShcg0%2BCbAZPUfIroR9ervzc6u5eq%2FeMYWVIXKLWu8valnbKnoBqVktg5v6ojVkX0J0%2F7Ao18fkKKU0%2BB7BBewiL6g9F4y8Q6gF6JbPqJUuCRwEaxanBmU3JP1tR16q%2B9cVRiJWTT2mvQ88RCht%2Fo3uiUy7dFuesJ4AQu3eHjoSQZd5Y3gBXWBekET%2B5tN0tfe6b3Rhopf036IR36%2F%2BlOufiDxekIaqFg8NaI2xu0Zf8iD%2BPMHT0PbOxFiHrSV%2FSBRM4FakBoJ8zOrH7l9c0i%2BlDKjO8GjMZvLVw1y3nn1w527Tgiwt7U87172g%2FzM1eqHzCtmtW5bOoBTBa60%2F3Pxw%2BqvvNj0mDzn6%2FZhMxePJsDze5aVQavcD2L9GioqSUr7QayfGbdu4F3pwIsMIyhtCZQ4rUHwFZoLIcEGUzWiDG55QGdEv8Gcip8DZZIxZNQbH%2BkgiNyhKq2neipvSM3eWnuLYGEE%2Fyr2rgzeib0RcIL8TQctooWJTeu5Daii0EgBQ5uBnAopTFHufWKzmTvC18f%2FBg%3D%3D">
+		</iframe>
+	</div>
+
+    <div class="footer-info">
+        <p>Autor: Inga Krel | Erstellungsdatum: 12.2.2026 | Datum heute: <span id="current-date"></span></p>
+        <p>
+            Karte wurde mit in <a href="https://qgis.org/">QGIS</a> (3.44) erstellt und mit <a href="https://qgiscloud.com/">QGIS Cloud</a> online zur Verfügung gestellt. 
+			<br>Quellen: 
+			Bathymetry ©2026<a href="https://www.gmrt.org/"> GMRT</a>,
+            <a href="https://www.submarinecablemap.com/">TeleGeography</a> CC BY-SA 4.0,
+            <a href="https://www.naturalearthdata.com/">Natural Earth</a>,
+            <a href="https://carto.com/basemaps">Map tiles by CartoDB</a> under CC BY 3.0. Data by OpenStreetMap, under ODbL. 
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('current-date').textContent =
+            new Date().toLocaleDateString('de-DE');
+
+        function toggleLegend() {
+            const content = document.getElementById("legendContent");
+            const button = document.querySelector(".legend-toggle");
+
+            content.classList.toggle("open");
+
+            button.textContent = content.classList.contains("open")
+                ? "Legenden ausblenden"
+                : "Legenden anzeigen";
+        }
+    </script>
+
+</body>
+</html>
